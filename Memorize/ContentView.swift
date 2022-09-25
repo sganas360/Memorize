@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     var emojis = ["✈️", "🚅", "🚌", "🚗","🚀","🚙","⛵️","🛵","🚢","🚎","🛴"]
     
-    @State var emojiCount = 4
+    @State var emojiCount = 5
     
     var body: some View {
         VStack{
