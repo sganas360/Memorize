@@ -8,32 +8,88 @@
 import SwiftUI
 
 struct ContentView: View {
-    var emojis = ["✈️", "🚅", "🚌", "🚗","🚀","🚙","⛵️","🛵","🚢","🚎","🛴"]
-    
-    @State var emojiCount = 5
-    
+   var vehicleEmojis = ["✈️", "🚅", "🚌", "🚗","🚀","🚙","⛵️","🛵","🚢","🚎","🛴"]
+   let animalEmojis = ["🐕" ,"🦌" ,"🦝" ,"🦥" ,"🦔" ,"🐁"]
+   let plantEmojis = ["🌵" ,"🎄" ,"🌳" ,"🌴" ,"💐" ,"🌻", "🌹", "🍄"]
+   @State var emojis: [String]
+   @State var emojiCount = 5
     var body: some View {
         VStack{
             ScrollView{
+               Text("Memorize!")
+                  .font(.largeTitle)
+                  .foregroundColor(Color.black)
                 LazyVGrid(columns: [GridItem(.adaptive(minimum:65))]){
                     ForEach(emojis[0..<emojiCount], id: \.self) { emoji in
-                        CardView(content: emoji).aspectRatio(2/3, contentMode: .fit)
+                       CardView(content: emoji).aspectRatio(2/3, contentMode: .fit)
                     }
                 }
             }
             .foregroundColor(.red)
             Spacer()
             HStack{
-                remove
-                Spacer()
-                add
+               Spacer()
+               vehicles
+               Spacer()
+               animals
+               Spacer()
+               plants
+               Spacer()
             }
             .font(.largeTitle)
             .padding(.horizontal)
         }
         .padding(.horizontal)
     }
+   
+   init(){
+      emojis = vehicleEmojis
+   }
     
+   var vehicles: some View {
+      VStack{
+         Button{
+            emojis = vehicleEmojis.shuffled()
+            emojiCount = Int.random(in: 4...vehicleEmojis.count)
+         } label: {
+            Image(systemName: "car")
+         }
+         Text("Vehicles")
+            .font(.footnote)
+            .foregroundColor(Color.blue)
+      }
+   }
+   
+   var plants: some View {
+      VStack{
+         Button{
+            emojis = plantEmojis.shuffled()
+            emojiCount = Int.random(in: 4...plantEmojis.count)
+         } label: {
+            Image(systemName: "leaf")
+         }
+         Text("Plants")
+            .font(.footnote)
+            .foregroundColor(Color.blue)
+      }
+   }
+   
+   var animals: some View {
+      VStack{
+         Button{
+            emojis = animalEmojis.shuffled()
+            emojiCount = Int.random(in: 4...animalEmojis.count)
+         } label: {
+            Image(systemName: "pawprint")
+         }
+         Text("Animals")
+            .font(.footnote)
+            .foregroundColor(Color.blue)
+      }
+   }
+
+   
+   
     var remove: some View {
             Button {
                 if emojiCount < emojis.count{
